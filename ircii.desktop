@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=ircII
+Comment=Internet Relay Chat Client
+Comment[pl]=Klient IRC-II
+Exec=ircii
+Terminal=1
+Type=Application
