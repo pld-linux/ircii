@@ -1,13 +1,13 @@
-diff -urN ircii-4.4L.orig/Makefile.in ircii-4.4L/Makefile.in
---- ircii-4.4L.orig/Makefile.in	Fri Sep  3 18:25:07 1999
-+++ ircii-4.4L/Makefile.in	Fri Sep  3 18:29:20 1999
+diff -urN ircii-4.4M.org/Makefile.in ircii-4.4M/Makefile.in
+--- ircii-4.4M.org/Makefile.in	Thu Feb  3 22:33:32 2000
++++ ircii-4.4M/Makefile.in	Thu Feb  3 22:33:48 2000
 @@ -59,17 +59,18 @@
  #   clean               - remove all .o files, core, and binaries
  #   distclean           - remove all files geneated by compilation/installation.
  
 -prefix = @prefix@
 -exec_prefix = @exec_prefix@
-+DESTDIR=
++DESTDIR =
 +prefix = $(DESTDIR)@prefix@
 +exec_prefix = $(DESTDIR)@exec_prefix@
  topdir = @srcdir@
@@ -21,7 +21,7 @@ diff -urN ircii-4.4L.orig/Makefile.in ircii-4.4L/Makefile.in
 +datadir = $(DESTDIR)@datadir@
  libdir = ${exec_prefix}/lib
 -mandir = ${prefix}/man/man1
-+mandir = ${prefix}/share/man/man1
++mandir = $(DESTDIR)@mandir@/man1
  
  # Where the ircII binary will be installed.
  # 'make install' will compile and install the program
@@ -54,31 +54,29 @@ diff -urN ircii-4.4L.orig/Makefile.in ircii-4.4L/Makefile.in
  	@if test -f $(INSTALL_IRC).old; then $(RM) $(INSTALL_IRC).old; fi
  	@if test -f $(INSTALL_IRC); then $(MV) $(INSTALL_IRC) $(INSTALL_IRC).old; fi
  	$(RM) $(INSTALL_IRC)
-diff -urN ircii-4.4L.orig/configure ircii-4.4L/configure
---- ircii-4.4L.orig/configure	Fri Sep  3 18:25:07 1999
-+++ ircii-4.4L/configure	Fri Sep  3 18:26:27 1999
-@@ -3177,7 +3177,7 @@
-   cat > conftest.$ac_ext <<EOF
- #line 3179 "configure"
- #include "confdefs.h"
--#include <curses.h>
-+#include <ncurses/curses.h>
- 
- EOF
- if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
-diff -urN ircii-4.4L.orig/configure.in ircii-4.4L/configure.in
---- ircii-4.4L.orig/configure.in	Fri Sep  3 18:25:07 1999
-+++ ircii-4.4L/configure.in	Fri Sep  3 18:26:51 1999
-@@ -375,7 +375,7 @@
+diff -urN ircii-4.4M.org/configure.in ircii-4.4M/configure.in
+--- ircii-4.4M.org/configure.in	Thu Feb  3 22:33:32 2000
++++ ircii-4.4M/configure.in	Thu Feb  3 22:35:07 2000
+@@ -356,11 +356,16 @@
+   AC_DEFINE(INCLUDE_CURSES_H)
+ else
+   olibs="$LIBS"
+-  AC_CHECK_LIB(termcap, tgetent, LIBS="-ltermcap $olibs",
++  if test -d /usr/include/ncurses
++  then
++  	CFLAGS="-I/usr/include/ncurses $CFLAGS"
++  fi
++  AC_CHECK_LIB(tinfo, tgetent, LIBS="-ltinfo $olibs",
++   AC_CHECK_LIB(termcap, tgetent, LIBS="-ltermcap $olibs",
+     AC_CHECK_LIB(termlib, tgetent, LIBS="-ltermlib $olibs",
+       AC_CHECK_LIB(curses, tgetent, LIBS="-lcurses $olibs",
          AC_CHECK_LIB(xtermcap, tgetent, LIBS="-lxtermcap $olibs",
-           AC_MSG_WARN(i can not find tgetent.  you might need to help me)))))
+-          AC_MSG_WARN(i can not find tgetent.  you might need to help me)))))
++          AC_MSG_WARN(i can not find tgetent.  you might need to help me))))))
    AC_MSG_CHECKING(for tputs in curses.h)
--  AC_EGREP_CPP([tputs( |	|\()],[#include <curses.h>
-+  AC_EGREP_CPP([tputs( |	|\()],[#include <ncurses/curses.h>
+   AC_EGREP_CPP([tputs( |	|\()],[#include <curses.h>
  ], AC_DEFINE(INCLUDE_CURSES_H) AC_MSG_RESULT(yes), blahhack=1; AC_MSG_RESULT(no))
- fi
- 
-@@ -699,7 +699,7 @@
+@@ -686,7 +691,7 @@
  
  if test ! -n "$IRCLIB";
  then
@@ -87,18 +85,9 @@ diff -urN ircii-4.4L.orig/configure.in ircii-4.4L/configure.in
  fi
  AC_SUBST(IRCLIB)
  
-diff -urN ircii-4.4L.orig/include/config.h.dist ircii-4.4L/include/config.h.dist
---- ircii-4.4L.orig/include/config.h.dist	Fri Sep  3 18:25:09 1999
-+++ ircii-4.4L/include/config.h.dist	Fri Sep  3 18:32:46 1999
-@@ -47,7 +47,7 @@
-  * file and the ircII can find it, this setting is overridden.
-  */
- #ifndef DEFAULT_SERVER
--# define DEFAULT_SERVER	    "change.this.to.a.server"
-+# define DEFAULT_SERVER	    "warszawa.irc.pl"
- #endif
- 
- /*
+diff -urN ircii-4.4M.org/include/config.h.dist ircii-4.4M/include/config.h.dist
+--- ircii-4.4M.org/include/config.h.dist	Thu Feb  3 22:33:32 2000
++++ ircii-4.4M/include/config.h.dist	Thu Feb  3 22:33:48 2000
 @@ -89,7 +89,7 @@
   * DEFAULT_SERVER. 
  */
@@ -122,19 +111,58 @@ diff -urN ircii-4.4L.orig/include/config.h.dist ircii-4.4L/include/config.h.dist
  #define DEFAULT_LASTLOG_LEVEL "ALL -CRAP"
  #define DEFAULT_LOG 0
 -#define DEFAULT_LOGFILE "IrcLog"
-+#define DEFAULT_LOGFILE ".IrcLog"
++#define DEFAULT_LOGFILE ".irciilog"
+ #define DEFAULT_MAKE_NOTICE_MSG 1
  #define DEFAULT_MAIL 0
  #define DEFAULT_MAX_RECURSIONS 10
- #define DEFAULT_MINIMUM_SERVERS 0
-diff -urN ircii-4.4L.orig/include/ircterm.h ircii-4.4L/include/ircterm.h
---- ircii-4.4L.orig/include/ircterm.h	Fri Sep  3 18:25:09 1999
-+++ ircii-4.4L/include/ircterm.h	Fri Sep  3 18:26:27 1999
-@@ -38,7 +38,7 @@
- # define __ircterm_h_
+diff -urN ircii-4.4M.org/source/ircaux.c ircii-4.4M/source/ircaux.c
+--- ircii-4.4M.org/source/ircaux.c	Thu Feb  3 22:33:33 2000
++++ ircii-4.4M/source/ircaux.c	Thu Feb  3 22:33:48 2000
+@@ -687,8 +687,12 @@
+ 		hints.ai_family = AF_UNSPEC;
+ 		err = getaddrinfo(strhost, strservice, &hints, &res0);
+ 	}
+-	if (err != 0)
++	if (err)
++	{
++		/* zero errno to get "unknown host" error message */
++		errno = 0;
+ 		return (-2);
++	}
+ 	err = -1;
+ 	for (res = res0; res; res = res->ai_next) {
+ 		if ((s = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) < 0)
+@@ -776,7 +780,11 @@
+ 		for (portnum = 1023; portnum > 600; portnum--)
+ 		{
+ #ifdef INET6
+-			if (bind_local_addr(NULL, "0", s, res->ai_family) != -1)
++			char portbuf[32];
++			
++			sprintf(portbuf, "%d", portnum);
++			portbuf[sizeof(portbuf) - 1] = 0;
++			if (bind_local_addr(NULL, portbuf, s, res->ai_family) != -1)
+ #else
+ 			localaddr.sin_port = htons(portnum);
+ 			if (bind(s, (struct sockaddr *) &localaddr,
+@@ -865,20 +873,12 @@
+ 	err = getaddrinfo(localhost, localport, &hintsx, &res0x);
  
- #ifdef INCLUDE_CURSES_H
--# include <curses.h>
-+# include <ncurses/curses.h>
- #endif /* INCLUDE_CURSES_H */
- 
- /* this is really busted on solaris -mrg */
+ 	if (err != 0)
+-#ifdef __linux__
+-		/*
+-		 * Due to bug in glibc implementation in getaddrinfo() we always
+-		 * return -10.   This will be fixed, soon
+-		 */
+-		return -10;
+-#else
+ 	{
+ 		if (err == EAI_ADDRFAMILY)
+ 			return -10;
+ 		else
+ 			return -2;
+ 	}
+-#endif
+ 	err = -1;
+ 	for (resx = res0x; resx; resx = resx->ai_next)
+ 	{
