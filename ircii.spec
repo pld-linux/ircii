@@ -1,14 +1,12 @@
 Summary:	Popular Unix Irc client
 Name:		ircii
-Version:	4.4G
-Release:	1d
+Version:	4.4J
+Release:	1
 Copyright:	BSD
 Group:		Applications/Communications
-Source:		ftp://ircii.warped.com/pub/ircII/ircii-current.tar.gz
+Source:		ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
 Source1:	ircii.wmconfig
-Patch1:		ircii-current-debian.patch
-Patch2:		ircii-4.4B.non-blocking.patch
-Patch3:		ircii-4.4B.config.patch
+Patch:		ircii-config.patch
 Obsoletes:	ircii-help
 BuildRoot:	/tmp/%{name}-%{version}-root
 Summary(de):	Beliebter Unix-IRC-Client
@@ -42,19 +40,14 @@ Bu, yaygýn kullanýlan bir IRC (Internet Relay Chat) istemcisidir. Dünya
 sonra kullanýcý diðer insanlarla sohbet edebilir.
 
 %prep
-%setup -q -n %{name}-current
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%setup -q
+%patch -p1
 
 %build
-rm -rf `find . -name CVS`
-CFLAGS="$RPM_OPT_FLAGS -DDEBIAN" LDFLAGS=-s \
-./configure %{_target_platform} \
-    --prefix=/usr \
+%configure \
     --with-cast \
     --with-default-server=warszawa.irc.pl:6667
-    
+
 cd include; make; cd ..
 make
 
@@ -62,14 +55,12 @@ make
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/X11/wmconfig
 
-make prefix=$RPM_BUILD_ROOT/usr install
-ln -sf irc-%{version} $RPM_BUILD_ROOT%{_bindir}/irc
-
-install %SOURCE1 $RPM_BUILD_ROOT/etc/X11/wmconfig/ircii
-
-strip $RPM_BUILD_ROOT%{_bindir}/* || :
-
-gzip -9nf doc/* $RPM_BUILD_ROOT%{_mandir}/man1/*
+make	prefix=$RPM_BUILD_ROOT/usr exec_prefix=$RPM_BUILD_ROOT/usr \
+	bindir=$RPM_BUILD_ROOT%{_bindir} mandir=$RPM_BUILD_ROOT%{_mandir}/man1 install
+ln -sf	irc-%{version} $RPM_BUILD_ROOT%{_bindir}/irc
+install	%SOURCE1 $RPM_BUILD_ROOT/etc/X11/wmconfig/ircii
+strip	$RPM_BUILD_ROOT%{_bindir}/* || :
+gzip	-9nf doc/* $RPM_BUILD_ROOT%{_mandir}/man1/*
 
 %post
 if [ ! -f /etc/irc/ircII.servers ]; then
@@ -95,10 +86,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc doc/*
-
 %attr(755,root,root) %{_bindir}/*
-
-%attr(644,root,root,755) %{_datadir}/irc
-
+%attr(755,root,root) %dir %{_datadir}/irc
+%attr(644,root,root) %{_datadir}/irc
 %attr(644,root,root) /etc/X11/wmconfig/ircii
 %{_mandir}/man1/*
