@@ -50,7 +50,7 @@ sonra kullanýcý diðer insanlarla sohbet edebilir.
 %build
 rm -rf `find . -name CVS`
 CFLAGS="$RPM_OPT_FLAGS -DDEBIAN" LDFLAGS=-s \
-./configure %{_target} \
+./configure %{_target_platform} \
     --prefix=/usr \
     --with-cast \
     --with-default-server=warszawa.irc.pl:6667
