@@ -5,7 +5,7 @@ Summary(pl):	Popularny Unixowy klient IRC ze wsparciem dla IPv6
 Summary(tr):	Yaygýn Unix Irc istemcisi (IPv6)
 Name:		ircii
 Version:	4.4S
-Release:	1
+Release:	2
 Copyright:	BSD
 Group:		Applications/Networking
 Group(pl):	Aplikacje/Sieciowe
