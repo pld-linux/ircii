@@ -57,7 +57,7 @@ autoconf
 %configure \
 	--with-paranoid \
 	--enable-ipv6 \
-	--with-default-server=poznan.irc.pl:6667 \
+	--with-default-server="poznan.irc.pl wroclaw.irc.pl warszawa.irc.pl krakow.irc.pl lublin.irc.pl" \
 	--with-cast
 %{__make}
 
