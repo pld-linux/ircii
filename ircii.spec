@@ -5,7 +5,7 @@ Summary(pl):	Popularny Unixowy klient IRC
 Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
 Version:	4.4Z
-Release:	2
+Release:	3
 License:	BSD
 Group:		Applications/Networking
 Group(de):	Applikationen/Netzwerkwesen
@@ -53,8 +53,8 @@ saðlandýktan sonra kullanýcý diðer insanlarla sohbet edebilir.
 %patch1 -p1
 
 %build
-autoconf
-%configure \
+#autoconf
+%configure2_13 \
 	--with-paranoid \
 	--enable-ipv6 \
 	--with-default-server="poznan.irc.pl wroclaw.irc.pl warszawa.irc.pl krakow.irc.pl lublin.irc.pl" \
@@ -69,7 +69,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_applnkdir}/Network/Communicatio
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/irc-%{version} $RPM_BUILD_ROOT%{_bindir}/ircii
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
-chmod -R a=rX,u=rwX $RPM_BUILD_ROOT%{_datadir}/ircii
+chmod -R a=rX,u=rwX $RPM_BUILD_ROOT%{_datadir}/irc
 
 %post
 if [ ! -f /etc/irc/ircII.servers ]; then
@@ -96,6 +96,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc NEWS README ChangeLog
 %attr(755,root,root) %{_bindir}/*ircii
 %attr(755,root,root) %dir %{_sysconfdir}/irc
-%attr( - ,root,root) %{_datadir}/ircii
+%attr( - ,root,root) %{_datadir}/irc
 %{_applnkdir}/Network/Communications/*
 %{_mandir}/man*/*
