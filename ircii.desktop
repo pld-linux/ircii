@@ -3,6 +3,6 @@ Name=IrcII
 Comment=Internet Relay Chat Client
 Comment[pl]=Klient IRC-II
 Exec=ircii
-Terminal=1
+Terminal=true
 Type=Application
 # vi: encoding=utf-8
