@@ -14,6 +14,7 @@ Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.bz2
 Source1:	%{name}.desktop
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
+Patch2:		%{name}-buffer.patch
 Obsoletes:	ircii-help
 Requires:	ncompress
 BuildRequires:	ncompress
@@ -50,6 +51,7 @@ saðlandýktan sonra kullanýcý diðer insanlarla sohbet edebilir.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 autoconf
