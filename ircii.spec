@@ -55,7 +55,7 @@ LDFLAGS="-s"; export LDFLAGS
     --enable-ipv6 \
     --with-default-server=poznan.irc.pl:6667 \
     --with-cast
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
