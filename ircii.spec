@@ -1,19 +1,21 @@
-Summary:        Popular Unix Irc client
-Summary(de):	Beliebter Unix-IRC-Client
-Summary(fr):	Client irc UNIX populaire.
-Summary(pl):	Popularny Unixowy klient IRC
-Summary(tr):	Yaygýn Unix Irc istemcisi
+Summary:        Popular Unix Irc client with IPv6 support
+Summary(de):	Beliebter Unix-IRC-Client (IPv6)
+Summary(fr):	Client irc UNIX populaire. (IPv6)
+Summary(pl):	Popularny Unixowy klient IRC ze wsparciem dla IPv6
+Summary(tr):	Yaygýn Unix Irc istemcisi (IPv6)
 Name:		ircii
-Version:	4.4L
+Version:	4.4M
 Release:	1
 Copyright:	BSD
 Group:		Applications/Networking
 Group(pl):	Aplikacje/Sieciowe
+Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
 Source:		ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
 Source1:	ircii.wmconfig
 Patch0:		ircii-config.patch
 Obsoletes:	ircii-help
 BuildRequires:	ncompress
+BuildRequires:	ncurses-devel
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -46,10 +48,12 @@ sonra kullanýcý diðer insanlarla sohbet edebilir.
 
 %build
 autoconf
-
+LDFLAGS="-s"; export LDFLAGS
 %configure \
-    --with-cast \
-    --with-default-server=warszawa.irc.pl:6667
+    --with-paranoid \
+    --enable-ipv6 \
+    --with-default-server=poznan.irc.pl:6667 \
+    --with-cast
 make
 
 %install
@@ -57,10 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d		$RPM_BUILD_ROOT/etc/{X11/wmconfig,irc}
 make			DESTDIR=$RPM_BUILD_ROOT	install
-ln -sf	irc-%{version}	$RPM_BUILD_ROOT%{_bindir}/irc
+ln -sf	irc-%{version}	$RPM_BUILD_ROOT%{_bindir}/ircii
 install	%{SOURCE1}	$RPM_BUILD_ROOT/etc/X11/wmconfig/ircii
 chmod -R a=rX,u=rwX	$RPM_BUILD_ROOT%{_datadir}/ircii
-strip			$RPM_BUILD_ROOT%{_bindir}/* || :
 gzip			-9nf doc/* $RPM_BUILD_ROOT%{_mandir}/man1/* NEWS INSTALL ChangeLog
 compress		$RPM_BUILD_ROOT%{_datadir}/ircii/{help/{*/*,*},script/*} || :
 
@@ -87,7 +90,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc {NEWS,INSTALL,ChangeLog}.gz
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/ircii
+%attr(755,root,root) %{_bindir}/irc-%{version}
 %attr(755,root,root) %dir /etc/irc
 %attr( - ,root,root) %{_datadir}/ircii
 %attr(644,root,root) %{_mandir}/man1/*
