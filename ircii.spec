@@ -5,7 +5,7 @@ Summary(pl):	Popularny Unixowy klient IRC
 Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
 Version:	4.4Z
-Release:	1
+Release:	2
 License:	BSD
 Group:		Applications/Networking
 Group(de):	Applikationen/Netzwerkwesen
@@ -63,12 +63,12 @@ autoconf
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_applnkdir}/Network/IRC}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_applnkdir}/Network/Communications}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/irc-%{version} $RPM_BUILD_ROOT%{_bindir}/ircii
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/IRC
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 chmod -R a=rX,u=rwX $RPM_BUILD_ROOT%{_datadir}/ircii
 
 %post
@@ -97,5 +97,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*ircii
 %attr(755,root,root) %dir %{_sysconfdir}/irc
 %attr( - ,root,root) %{_datadir}/ircii
-%{_applnkdir}/Network/IRC/*
+%{_applnkdir}/Network/Communications/*
 %{_mandir}/man*/*
