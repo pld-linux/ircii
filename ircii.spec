@@ -13,12 +13,12 @@ Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
 # Source0-md5:	af74a4c9ef47cd83785ea3873827b46a
 Source1:	%{name}.desktop
 Patch0:		%{name}-config.patch
-Obsoletes:	ircii-help
-Requires:	ncompress
-BuildRequires:	ncompress
 BuildRequires:	autoconf
+BuildRequires:	ncompress
 BuildRequires:	ncurses-devel >= 5.1
+Requires:	ncompress
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	ircii-help
 
 %description
 This is a popular Internet Relay Chat (IRC) client. It is a program
@@ -61,7 +61,8 @@ saðlandýktan sonra kullanýcý diðer insanlarla sohbet edebilir.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_applnkdir}/Network/Communications}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/irc-%{version} $RPM_BUILD_ROOT%{_bindir}/ircii
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
