@@ -5,7 +5,7 @@ Summary(pl):	Popularny Unixowy klient IRC
 Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
 Version:	20030709
-Release:	2
+Release:	3
 License:	BSD
 Group:		Applications/Networking
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
@@ -53,7 +53,7 @@ saðlandýktan sonra kullanýcý diðer insanlarla sohbet edebilir.
 %configure2_13 \
 	--with-paranoid \
 	--enable-ipv6 \
-	--with-default-server="poznan.irc.pl wroclaw.irc.pl warszawa.irc.pl krakow.irc.pl lublin.irc.pl" \
+	--with-default-server="irc.pld-linux.org poznan.irc.pl wroclaw.irc.pl warszawa.irc.pl krakow.irc.pl lublin.irc.pl" \
 	--with-cast
 %{__make}
 
@@ -75,11 +75,12 @@ if [ ! -f /etc/irc/ircII.servers ]; then
 		chmod 755 /etc/irc
 	fi
 cat  << EOF > /etc/irc/ircII.servers
+irc.pld-linux.org:6667
 warszawa.irc.pl:6667
 lublin.irc.pl:6667
 krakow.irc.pl:6667
 poznan.irc.pl:6667
-hub.irc.pl:6667
+wroclaw.irc.pl:6667
 EOF
 	chown root:root /etc/irc/ircII.servers
 	chmod 644 /etc/irc/ircII.servers
