@@ -1,31 +1,22 @@
-diff -urN ircii-4.4M.org/Makefile.in ircii-4.4M/Makefile.in
---- ircii-4.4M.org/Makefile.in	Thu Feb  3 22:33:32 2000
-+++ ircii-4.4M/Makefile.in	Thu Feb  3 22:33:48 2000
-@@ -59,17 +59,18 @@
- #   clean               - remove all .o files, core, and binaries
- #   distclean           - remove all files geneated by compilation/installation.
- 
--prefix = @prefix@
--exec_prefix = @exec_prefix@
-+DESTDIR =
-+prefix = $(DESTDIR)@prefix@
-+exec_prefix = $(DESTDIR)@exec_prefix@
- topdir = @srcdir@
- srcdir = @srcdir@/source
+diff -urN ircii-4.4S.org/Makefile.in ircii-4.4S/Makefile.in
+--- ircii-4.4S.org/Makefile.in	Fri Apr  7 15:00:32 2000
++++ ircii-4.4S/Makefile.in	Fri Apr  7 15:12:56 2000
+@@ -67,10 +67,10 @@
  incdir = @srcdir@/include
  VPATH = @srcdir@/source
  objdir = @objdir@
 -bindir = @bindir@
 -datadir = @datadir@
+-libdir = @libdir@
+-mandir = @mandir@/man1
 +bindir = $(DESTDIR)@bindir@
 +datadir = $(DESTDIR)@datadir@
- libdir = ${exec_prefix}/lib
--mandir = ${prefix}/man/man1
++libdir = $(DESTDIR)@libdir@
 +mandir = $(DESTDIR)@mandir@/man1
  
  # Where the ircII binary will be installed.
  # 'make install' will compile and install the program
-@@ -153,16 +154,16 @@
+@@ -154,16 +154,16 @@
  
  # Set the next line to the full path for installation of the ircio program
  # if you wish to use it. 
@@ -45,7 +36,7 @@ diff -urN ircii-4.4M.org/Makefile.in ircii-4.4M/Makefile.in
  
  # This command will be used to install the irc help files.  If you don't
  # want to install them, replace with the following:
-@@ -196,7 +197,7 @@
+@@ -197,7 +197,7 @@
  
  installirc: irc installdirs
  	$(INSTALL) irc $(INSTALL_IRC)-$(VERSION)
@@ -54,29 +45,10 @@ diff -urN ircii-4.4M.org/Makefile.in ircii-4.4M/Makefile.in
  	@if test -f $(INSTALL_IRC).old; then $(RM) $(INSTALL_IRC).old; fi
  	@if test -f $(INSTALL_IRC); then $(MV) $(INSTALL_IRC) $(INSTALL_IRC).old; fi
  	$(RM) $(INSTALL_IRC)
-diff -urN ircii-4.4M.org/configure.in ircii-4.4M/configure.in
---- ircii-4.4M.org/configure.in	Thu Feb  3 22:33:32 2000
-+++ ircii-4.4M/configure.in	Thu Feb  3 22:35:07 2000
-@@ -356,11 +356,16 @@
-   AC_DEFINE(INCLUDE_CURSES_H)
- else
-   olibs="$LIBS"
--  AC_CHECK_LIB(termcap, tgetent, LIBS="-ltermcap $olibs",
-+  if test -d /usr/include/ncurses
-+  then
-+  	CFLAGS="-I/usr/include/ncurses $CFLAGS"
-+  fi
-+  AC_CHECK_LIB(tinfo, tgetent, LIBS="-ltinfo $olibs",
-+   AC_CHECK_LIB(termcap, tgetent, LIBS="-ltermcap $olibs",
-     AC_CHECK_LIB(termlib, tgetent, LIBS="-ltermlib $olibs",
-       AC_CHECK_LIB(curses, tgetent, LIBS="-lcurses $olibs",
-         AC_CHECK_LIB(xtermcap, tgetent, LIBS="-lxtermcap $olibs",
--          AC_MSG_WARN(i can not find tgetent.  you might need to help me)))))
-+          AC_MSG_WARN(i can not find tgetent.  you might need to help me))))))
-   AC_MSG_CHECKING(for tputs in curses.h)
-   AC_EGREP_CPP([tputs( |	|\()],[#include <curses.h>
- ], AC_DEFINE(INCLUDE_CURSES_H) AC_MSG_RESULT(yes), blahhack=1; AC_MSG_RESULT(no))
-@@ -686,7 +691,7 @@
+diff -urN ircii-4.4S.org/configure.in ircii-4.4S/configure.in
+--- ircii-4.4S.org/configure.in	Fri Apr  7 15:00:32 2000
++++ ircii-4.4S/configure.in	Fri Apr  7 15:12:18 2000
+@@ -695,7 +695,7 @@
  
  if test ! -n "$IRCLIB";
  then
@@ -85,9 +57,9 @@ diff -urN ircii-4.4M.org/configure.in ircii-4.4M/configure.in
  fi
  AC_SUBST(IRCLIB)
  
-diff -urN ircii-4.4M.org/include/config.h.dist ircii-4.4M/include/config.h.dist
---- ircii-4.4M.org/include/config.h.dist	Thu Feb  3 22:33:32 2000
-+++ ircii-4.4M/include/config.h.dist	Thu Feb  3 22:33:48 2000
+diff -urN ircii-4.4S.org/include/config.h.dist ircii-4.4S/include/config.h.dist
+--- ircii-4.4S.org/include/config.h.dist	Fri Apr  7 15:00:32 2000
++++ ircii-4.4S/include/config.h.dist	Fri Apr  7 15:12:18 2000
 @@ -89,7 +89,7 @@
   * DEFAULT_SERVER. 
  */
@@ -115,54 +87,3 @@ diff -urN ircii-4.4M.org/include/config.h.dist ircii-4.4M/include/config.h.dist
  #define DEFAULT_MAKE_NOTICE_MSG 1
  #define DEFAULT_MAIL 0
  #define DEFAULT_MAX_RECURSIONS 10
-diff -urN ircii-4.4M.org/source/ircaux.c ircii-4.4M/source/ircaux.c
---- ircii-4.4M.org/source/ircaux.c	Thu Feb  3 22:33:33 2000
-+++ ircii-4.4M/source/ircaux.c	Thu Feb  3 22:33:48 2000
-@@ -687,8 +687,12 @@
- 		hints.ai_family = AF_UNSPEC;
- 		err = getaddrinfo(strhost, strservice, &hints, &res0);
- 	}
--	if (err != 0)
-+	if (err)
-+	{
-+		/* zero errno to get "unknown host" error message */
-+		errno = 0;
- 		return (-2);
-+	}
- 	err = -1;
- 	for (res = res0; res; res = res->ai_next) {
- 		if ((s = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) < 0)
-@@ -776,7 +780,11 @@
- 		for (portnum = 1023; portnum > 600; portnum--)
- 		{
- #ifdef INET6
--			if (bind_local_addr(NULL, "0", s, res->ai_family) != -1)
-+			char portbuf[32];
-+			
-+			sprintf(portbuf, "%d", portnum);
-+			portbuf[sizeof(portbuf) - 1] = 0;
-+			if (bind_local_addr(NULL, portbuf, s, res->ai_family) != -1)
- #else
- 			localaddr.sin_port = htons(portnum);
- 			if (bind(s, (struct sockaddr *) &localaddr,
-@@ -865,20 +873,12 @@
- 	err = getaddrinfo(localhost, localport, &hintsx, &res0x);
- 
- 	if (err != 0)
--#ifdef __linux__
--		/*
--		 * Due to bug in glibc implementation in getaddrinfo() we always
--		 * return -10.   This will be fixed, soon
--		 */
--		return -10;
--#else
- 	{
- 		if (err == EAI_ADDRFAMILY)
- 			return -10;
- 		else
- 			return -2;
- 	}
--#endif
- 	err = -1;
- 	for (resx = res0x; resx; resx = resx->ai_next)
- 	{
