@@ -17,24 +17,24 @@ BuildRequires:	ncompress
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
-This is a popular Internet Relay Chat (IRC) client.  It
-is a program used to connect to IRC servers around the
-globe so that the user can ``chat'' with others.
+This is a popular Internet Relay Chat (IRC) client.  It is a program used to
+connect to IRC servers around the globe so that the user can ``chat'' with
+others.
 
 %description -l de
 Dies ist ein beliebter IRC-Client (Internet Relay Chat). Sie können eine
-Verbindung zu einem beliebigen IRC-Server aufbauen und mit
-anderen Benutzern 'chatten'.
+Verbindung zu einem beliebigen IRC-Server aufbauen und mit anderen Benutzern
+'chatten'.
 
 %description -l fr
-Le très poulaire client Internet Relay Chat (IRC). C'est
-un programme utilisé pour se connecter aux serveurs IRC à
-travers le monde entier et ``bavarder'' avec les autres.
+Le très poulaire client Internet Relay Chat (IRC). C'est un programme
+utilisé pour se connecter aux serveurs IRC à travers le monde entier et
+``bavarder'' avec les autres.
 
 %description -l pl
-To jest popularny klient IRC (Internet Relay Chat). To jest
-program u¿ywany do ³±czenia siê z serwerami IRC dooko³a
-globu tak by u¿ytkownicy mogli ze sob± rozmawiaæ.
+To jest popularny klient IRC (Internet Relay Chat). To jest program u¿ywany
+do ³±czenia siê z serwerami IRC dooko³a globu tak by u¿ytkownicy mogli ze
+sob± rozmawiaæ.
 
 %description -l tr
 Bu, yaygýn kullanýlan bir IRC (Internet Relay Chat) istemcisidir. Dünya
@@ -42,11 +42,12 @@ Bu, yaygýn kullanýlan bir IRC (Internet Relay Chat) istemcisidir. Dünya
 sonra kullanýcý diðer insanlarla sohbet edebilir.
 
 %prep
-%setup -q
+%setup  -q
 %patch0 -p1
 
 %build
 autoconf
+
 %configure \
     --with-cast \
     --with-default-server=warszawa.irc.pl:6667
