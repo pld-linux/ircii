@@ -1,0 +1,12 @@
+diff -urN ircii-4.4X.org/source/mail.c ircii-4.4X/source/mail.c
+--- ircii-4.4X.org/source/mail.c	Mon Sep 18 11:50:33 2000
++++ ircii-4.4X/source/mail.c	Mon Sep 18 11:50:52 2000
+@@ -85,7 +85,7 @@
+ init_mail()
+ {
+ 	u_char	*tmp_mail_path;
+-	u_char	buffer[BIG_BUFFER_SIZE];
++	u_char	buffer[BIG_BUFFER_SIZE+1];
+ 
+ 	if (mail_path)
+ 		return; /* why do it 2000 times?  -lynx */
