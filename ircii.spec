@@ -8,8 +8,6 @@ Version:	4.4Z
 Release:	3
 License:	BSD
 Group:		Applications/Networking
-Group(de):	Applikationen/Netzwerkwesen
-Group(pl):	Aplikacje/Sieciowe
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
 Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.bz2
 Source1:	%{name}.desktop
