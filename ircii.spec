@@ -69,7 +69,7 @@ install %SOURCE1 $RPM_BUILD_ROOT/etc/X11/wmconfig/ircii
 
 strip $RPM_BUILD_ROOT/usr/bin/* || :
 
-gzip -9nf doc/* $RPM_BUILD_ROOT/usr/man/man1/*
+gzip -9nf doc/* $RPM_BUILD_ROOT%{_mandir}/man1/*
 
 %post
 if [ ! -f /etc/irc/ircII.servers ]; then
@@ -101,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root, 755) /usr/share/irc
 
 %attr(644,root,root) /etc/X11/wmconfig/ircii
-%attr(644,root, man) /usr/man/man1/*
+%attr(644,root, man) %{_mandir}/man1/*
 
 %changelog
 * Thu Mar 04 1999 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
