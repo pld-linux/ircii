@@ -8,6 +8,7 @@ Version:	4.4X
 Release:	1
 License:	BSD
 Group:		Applications/Networking
+Group(de):	Applikationen/Netzwerkwesen
 Group(pl):	Aplikacje/Sieciowe
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
 Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.bz2
@@ -19,7 +20,7 @@ Obsoletes:	ircii-help
 Requires:	ncompress
 BuildRequires:	ncompress
 BuildRequires:	autoconf
-BuildRequires:	ncurses-devel
+BuildRequires:	ncurses-devel >= 5.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,7 +56,6 @@ saðlandýktan sonra kullanýcý diðer insanlarla sohbet edebilir.
 
 %build
 autoconf
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--with-paranoid \
 	--enable-ipv6 \
@@ -69,7 +69,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_applnkdir}/Network/IRC}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-mv $RPM_BUILD_ROOT%{_bindir}/irc-%{version} $RPM_BUILD_ROOT%{_bindir}/ircii
+mv -f $RPM_BUILD_ROOT%{_bindir}/irc-%{version} $RPM_BUILD_ROOT%{_bindir}/ircii
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/IRC
 
