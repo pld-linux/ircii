@@ -4,15 +4,14 @@ Summary(fr):	Client irc UNIX populaire
 Summary(pl):	Popularny Unixowy klient IRC
 Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
-Version:	4.4Z
-Release:	3
+Version:	20030315
+Release:	1
 License:	BSD
 Group:		Applications/Networking
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
-Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.bz2
+Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-config.patch
-Patch1:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
 Obsoletes:	ircii-help
 Requires:	ncompress
 BuildRequires:	ncompress
@@ -48,10 +47,8 @@ saðlandýktan sonra kullanýcý diðer insanlarla sohbet edebilir.
 %prep
 %setup  -q
 %patch0 -p1
-%patch1 -p1
 
 %build
-#autoconf
 %configure2_13 \
 	--with-paranoid \
 	--enable-ipv6 \
