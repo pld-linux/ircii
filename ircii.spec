@@ -1,19 +1,19 @@
-Summary:        Popular Unix Irc client with IPv6 support
-Summary(de):	Beliebter Unix-IRC-Client (IPv6)
-Summary(fr):	Client irc UNIX populaire. (IPv6)
-Summary(pl):	Popularny Unixowy klient IRC ze wsparciem dla IPv6
-Summary(tr):	Yaygýn Unix Irc istemcisi (IPv6)
+Summary:	Popular Unix Irc client
+Summary(de):	Beliebter Unix-IRC-Client
+Summary(fr):	Client irc UNIX populaire
+Summary(pl):	Popularny Unixowy klient IRC
+Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
 Version:	4.4S
 Release:	4
-Copyright:	BSD
+License:	BSD
 Group:		Applications/Networking
 Group(pl):	Aplikacje/Sieciowe
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
-Source:		ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.bz2
-Source1:	ircii.wmconfig
-Patch0:		ircii-config.patch
-Patch1:		ircii-gethostname_is_in_libc_aka_no_libnsl.patch
+Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.bz2
+Source1:	%{name}.desktop
+Patch0:		%{name}-config.patch
+Patch1:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
 Obsoletes:	ircii-help
 Requires:	ncompress
 BuildRequires:	ncompress
@@ -22,28 +22,29 @@ BuildRequires:	ncurses-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This is a popular Internet Relay Chat (IRC) client.  It is a program used to
-connect to IRC servers around the globe so that the user can ``chat'' with
-others.
+This is a popular Internet Relay Chat (IRC) client. It is a program
+used to connect to IRC servers around the globe so that the user can
+``chat'' with others.
 
 %description -l de
-Dies ist ein beliebter IRC-Client (Internet Relay Chat). Sie können eine
-Verbindung zu einem beliebigen IRC-Server aufbauen und mit anderen Benutzern
-'chatten'.
+Dies ist ein beliebter IRC-Client (Internet Relay Chat). Sie können
+eine Verbindung zu einem beliebigen IRC-Server aufbauen und mit
+anderen Benutzern 'chatten'.
 
 %description -l fr
 Le très poulaire client Internet Relay Chat (IRC). C'est un programme
-utilisé pour se connecter aux serveurs IRC à travers le monde entier et
-``bavarder'' avec les autres.
+utilisé pour se connecter aux serveurs IRC à travers le monde entier
+et ``bavarder'' avec les autres.
 
 %description -l pl
-Ircii to popularny klient IRC (Internet Relay Chat). S³u¿y do ³±czenia 
-siê z serwerami IRC dooko³a globu tak, by u¿ytkownicy mogli ze sob± rozmawiaæ.
+Ircii to popularny klient IRC (Internet Relay Chat). S³u¿y do ³±czenia
+siê z serwerami IRC dooko³a globu tak, by u¿ytkownicy mogli ze sob±
+rozmawiaæ.
 
 %description -l tr
-Bu, yaygýn kullanýlan bir IRC (Internet Relay Chat) istemcisidir. Dünya
-üzerinde herhangi bir IRC sunucusuna baðlantý saðlar; baðlantý saðlandýktan
-sonra kullanýcý diðer insanlarla sohbet edebilir.
+Bu, yaygýn kullanýlan bir IRC (Internet Relay Chat) istemcisidir.
+Dünya üzerinde herhangi bir IRC sunucusuna baðlantý saðlar; baðlantý
+saðlandýktan sonra kullanýcý diðer insanlarla sohbet edebilir.
 
 %prep
 %setup  -q
@@ -54,22 +55,27 @@ sonra kullanýcý diðer insanlarla sohbet edebilir.
 autoconf
 LDFLAGS="-s"; export LDFLAGS
 %configure \
-    --with-paranoid \
-    --enable-ipv6 \
-    --with-default-server=poznan.irc.pl:6667 \
-    --with-cast
+	--with-paranoid \
+	--enable-ipv6 \
+	--with-default-server=poznan.irc.pl:6667 \
+	--with-cast
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_applnkdir}/Network/IRC}
 
-install -d		$RPM_BUILD_ROOT/etc/{X11/wmconfig,irc}
-make			DESTDIR=$RPM_BUILD_ROOT	install
-ln -sf	irc-%{version}	$RPM_BUILD_ROOT%{_bindir}/ircii
-install	%{SOURCE1}	$RPM_BUILD_ROOT/etc/X11/wmconfig/ircii
-chmod -R a=rX,u=rwX	$RPM_BUILD_ROOT%{_datadir}/ircii
-gzip			-9nf doc/* $RPM_BUILD_ROOT%{_mandir}/man1/* NEWS INSTALL ChangeLog
-compress		$RPM_BUILD_ROOT%{_datadir}/ircii/{help/{*/*,*},script/*} || :
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
+
+mv $RPM_BUILD_ROOT%{_bindir}/irc-%{version} $RPM_BUILD_ROOT%{_bindir}/ircii
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/IRC
+
+chmod -R a=rX,u=rwX $RPM_BUILD_ROOT%{_datadir}/ircii
+
+gzip -9nf doc/* $RPM_BUILD_ROOT%{_mandir}/man1/* \
+	NEWS ChangeLog compress \
+	$RPM_BUILD_ROOT%{_datadir}/ircii/{help/{*/*,*},script/*} || :
 
 %post
 if [ ! -f /etc/irc/ircII.servers ]; then
@@ -93,10 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {NEWS,INSTALL,ChangeLog}.gz
+%doc *.gz
 %attr(755,root,root) %{_bindir}/ircii
-%attr(755,root,root) %{_bindir}/irc-%{version}
-%attr(755,root,root) %dir /etc/irc
+%attr(755,root,root) %dir %{_sysconfdir}/irc
 %attr( - ,root,root) %{_datadir}/ircii
-%attr(644,root,root) %{_mandir}/man1/*
-%attr(644,root,root) /etc/X11/wmconfig/ircii
+%{_applnkdir}/Network/IRC/*
+%{_mandir}/man1/*
