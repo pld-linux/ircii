@@ -13,6 +13,7 @@ Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
 # Source0-md5:	520e3230bffcd26c9112d61b9c65c65d
 Source1:	%{name}.desktop
 Patch0:		%{name}-config.patch
+URL:		http://www.eterna.com.au/ircii/
 BuildRequires:	autoconf
 BuildRequires:	ncompress
 BuildRequires:	ncurses-devel >= 5.1
