@@ -4,13 +4,13 @@ Summary(fr):	Client irc UNIX populaire
 Summary(pl):	Popularny Unixowy klient IRC
 Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
-Version:	20040216
+Version:	20040820
 Release:	2
 License:	BSD
 Group:		Applications/Networking
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
 Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
-# Source0-md5:	0386d9d6f2312fd19c356640ee986c31
+# Source0-md5:	520e3230bffcd26c9112d61b9c65c65d
 Source1:	%{name}.desktop
 Patch0:		%{name}-config.patch
 BuildRequires:	autoconf
