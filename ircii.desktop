@@ -6,4 +6,5 @@ Comment[pl]=Klient IRC-II
 Exec=ircii
 Terminal=true
 Type=Application
+Categories=ConsoleOnly;Network;IRCClient;
 # vi: encoding=utf-8
