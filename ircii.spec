@@ -4,16 +4,17 @@ Summary(fr):	Client irc UNIX populaire. (IPv6)
 Summary(pl):	Popularny Unixowy klient IRC ze wsparciem dla IPv6
 Summary(tr):	Yaygýn Unix Irc istemcisi (IPv6)
 Name:		ircii
-Version:	4.4M
+Version:	4.4S
 Release:	1
 Copyright:	BSD
 Group:		Applications/Networking
 Group(pl):	Aplikacje/Sieciowe
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
-Source:		ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
+Source:		ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.bz2
 Source1:	ircii.wmconfig
 Patch0:		ircii-config.patch
 Obsoletes:	ircii-help
+Requires:	ncompress
 BuildRequires:	ncompress
 BuildRequires:	ncurses-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
