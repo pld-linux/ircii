@@ -1,0 +1,17 @@
+diff -uNr ircii-4.4S.orig/configure.in ircii-4.4S/configure.in
+--- ircii-4.4S.orig/configure.in	Mon Aug 21 00:55:03 2000
++++ ircii-4.4S/configure.in	Mon Aug 21 01:00:51 2000
+@@ -527,9 +527,10 @@
+ if test ! -n "$libinet"; then
+ 	AC_CHECK_LIB(inet, socket, libnsl=1; LIBS="$LIBS -linet -lnsl_s",)
+ fi
+-if test ! -n "$libnsl"; then
+-	AC_CHECK_LIB(nsl, gethostname, LIBS="$LIBS -lnsl",)
+-fi
++
++AC_CHECK_FUNC(gethostname, ,
++       AC_CHECK_LIB(nsl, gethostname, LIBS="$LIBS -lnsl",) )
++
+ AC_CHECK_LIB(dgc, inet_addr, LIBS="$LIBS -ldgc",)
+ AC_CHECK_LIB(resolv, gethostbyname,
+   olibs=$LIBS
