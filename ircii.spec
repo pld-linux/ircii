@@ -10,6 +10,7 @@ License:	BSD
 Group:		Applications/Networking
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
 Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
+# Source0-md5:	5b5ef0adf0db269bb5aeb869a80e1fec
 Source1:	%{name}.desktop
 Patch0:		%{name}-config.patch
 Obsoletes:	ircii-help
