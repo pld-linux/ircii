@@ -63,11 +63,11 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/X11/wmconfig
 
 make prefix=$RPM_BUILD_ROOT/usr install
-ln -sf irc-%{version} $RPM_BUILD_ROOT/usr/bin/irc
+ln -sf irc-%{version} $RPM_BUILD_ROOT%{_bindir}/irc
 
 install %SOURCE1 $RPM_BUILD_ROOT/etc/X11/wmconfig/ircii
 
-strip $RPM_BUILD_ROOT/usr/bin/* || :
+strip $RPM_BUILD_ROOT%{_bindir}/* || :
 
 gzip -9nf doc/* $RPM_BUILD_ROOT%{_mandir}/man1/*
 
@@ -96,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc doc/*
 
-%attr(755,root,root) /usr/bin/*
+%attr(755,root,root) %{_bindir}/*
 
 %attr(644,root,root, 755) %{_datadir}/irc
 
