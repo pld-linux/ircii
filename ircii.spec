@@ -1,12 +1,12 @@
 Summary:	Popular Unix Irc client
 Name:		ircii
-Version:	4.4F
+Version:	4.4G
 Release:	1d
 Copyright:	BSD
 Group:		Applications/Communications
 Source:		ftp://ircii.warped.com/pub/ircII/ircii-current.tar.gz
 Source1:	ircii.wmconfig
-Patch1:		ircii-4.4E.mirc_colors.patch
+Patch1:		ircii-current-debian.patch
 Patch2:		ircii-4.4B.non-blocking.patch
 Patch3:		ircii-4.4B.config.patch
 Obsoletes:	ircii-help
@@ -42,15 +42,14 @@ Bu, yaygýn kullanýlan bir IRC (Internet Relay Chat) istemcisidir. Dünya
 sonra kullanýcý diðer insanlarla sohbet edebilir.
 
 %prep
-%setup -q -n %{name}
-# COLORS doesn't works well :(
-#%patch1 -p1
+%setup -q -n %{name}-current
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 
 %build
-rm -r `find . -name CVS`
-CFLAGS=$RPM_OPT_FLAGS LDFLAGS=-s \
+rm -rf `find . -name CVS`
+CFLAGS="$RPM_OPT_FLAGS -DDEBIAN" LDFLAGS=-s \
     ./configure \
     --prefix=/usr \
     --with-cast \
@@ -65,13 +64,12 @@ install -d $RPM_BUILD_ROOT/etc/X11/wmconfig
 
 make prefix=$RPM_BUILD_ROOT/usr install
 ln -sf irc-%{version} $RPM_BUILD_ROOT/usr/bin/irc
-ln -sf /etc/irc/ircII.servers $RPM_BUILD_ROOT/usr/share/irc/ircII.servers
 
 install %SOURCE1 $RPM_BUILD_ROOT/etc/X11/wmconfig/ircii
 
 strip $RPM_BUILD_ROOT/usr/bin/* || :
 
-bzip2 -9 doc/* $RPM_BUILD_ROOT/usr/man/man1/*
+gzip -9nf doc/* $RPM_BUILD_ROOT/usr/man/man1/*
 
 %post
 if [ ! -f /etc/irc/ircII.servers ]; then
@@ -106,6 +104,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root, man) /usr/man/man1/*
 
 %changelog
+* Thu Mar 04 1999 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
+- updated to 4.4G
+- man pages are now gzipped
+- added patch from debian
+
 * Fri Feb 19 1999 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
 - updated to 4.4F
 
