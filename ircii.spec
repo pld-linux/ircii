@@ -1,14 +1,14 @@
 Summary:        Popular Unix Irc client
 Summary(de):	Beliebter Unix-IRC-Client
 Summary(fr):	Client irc UNIX populaire.
-Summary(pl):	Popularny Unixowy Klient Irc
+Summary(pl):	Popularny Unixowy klient IRC
 Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
 Version:	4.4L
 Release:	1
 Copyright:	BSD
-Group:		Applications/Communications
-Group(pl):	Aplikacje/Komunikacja
+Group:		Applications/Networking
+Group(pl):	Aplikacje/Sieciowe
 Source:		ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
 Source1:	ircii.wmconfig
 Patch0:		ircii-config.patch
@@ -32,9 +32,8 @@ utilisé pour se connecter aux serveurs IRC à travers le monde entier et
 ``bavarder'' avec les autres.
 
 %description -l pl
-To jest popularny klient IRC (Internet Relay Chat). To jest program u¿ywany
-do ³±czenia siê z serwerami IRC dooko³a globu tak by u¿ytkownicy mogli ze
-sob± rozmawiaæ.
+Ircii to popularny klient IRC (Internet Relay Chat). S³u¿y do ³±czenia 
+siê z serwerami IRC dooko³a globu tak, by u¿ytkownicy mogli ze sob± rozmawiaæ.
 
 %description -l tr
 Bu, yaygýn kullanýlan bir IRC (Internet Relay Chat) istemcisidir. Dünya
