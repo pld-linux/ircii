@@ -1,14 +1,17 @@
-Summary:	Popular Unix Irc client
 Name:		ircii
 Version:	4.4J
 Release:	1
 Copyright:	BSD
 Group:		Applications/Communications
+Group(pl):	Aplikacje/Komunikacja
 Source:		ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
 Source1:	ircii.wmconfig
-Patch:		ircii-config.patch
+Patch0:		ircii-config.patch
+Patch1:		ircii-nick.patch
 Obsoletes:	ircii-help
+BuildRequires:	ncompress
 BuildRoot:	/tmp/%{name}-%{version}-root
+Summary:        Popular Unix Irc client
 Summary(de):	Beliebter Unix-IRC-Client
 Summary(fr):	Client irc UNIX populaire.
 Summary(tr):	Yaygýn Unix Irc istemcisi
@@ -41,32 +44,35 @@ sonra kullanýcý diðer insanlarla sohbet edebilir.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 %configure \
     --with-cast \
     --with-default-server=warszawa.irc.pl:6667
 
-cd include; make; cd ..
+make -C include
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/X11/wmconfig
 
-make	prefix=$RPM_BUILD_ROOT/usr exec_prefix=$RPM_BUILD_ROOT/usr \
-	bindir=$RPM_BUILD_ROOT%{_bindir} mandir=$RPM_BUILD_ROOT%{_mandir}/man1 install
-ln -sf	irc-%{version} $RPM_BUILD_ROOT%{_bindir}/irc
-install	%SOURCE1 $RPM_BUILD_ROOT/etc/X11/wmconfig/ircii
-strip	$RPM_BUILD_ROOT%{_bindir}/* || :
-gzip	-9nf doc/* $RPM_BUILD_ROOT%{_mandir}/man1/*
+install -d		$RPM_BUILD_ROOT/etc/{X11/wmconfig,irc}
+make			DESTDIR=$RPM_BUILD_ROOT	install
+ln -sf	irc-%{version}	$RPM_BUILD_ROOT%{_bindir}/irc
+install	%{SOURCE1}	$RPM_BUILD_ROOT/etc/X11/wmconfig/ircii
+chmod -R a=rX,u=rwX	$RPM_BUILD_ROOT%{_datadir}/ircii
+strip			$RPM_BUILD_ROOT%{_bindir}/* || :
+gzip			-9nf doc/* $RPM_BUILD_ROOT%{_mandir}/man1/* NEWS INSTALL ChangeLog
+compress		$RPM_BUILD_ROOT%{_datadir}/ircii/{help/{*/*,*},script/*} || :
 
 %post
 if [ ! -f /etc/irc/ircII.servers ]; then
-if [ ! -d /etc/irc ]; then
-install -d /etc/irc
-fi
+	if [ ! -d /etc/irc ]; then
+		install -d /etc/irc
+		chmod 755 /etc/irc
+	fi
 cat  << EOF > /etc/irc/ircII.servers
 warszawa.irc.pl:6667
 lublin.irc.pl:6667
@@ -74,10 +80,8 @@ krakow.irc.pl:6667
 poznan.irc.pl:6667
 hub.irc.pl:6667
 EOF
-chown root.root /etc/irc
-chown root.root /etc/irc/ircII.servers
-chmod 755 /etc/irc
-chmod 644 /etc/irc/ircII.servers
+	chown root.root /etc/irc/ircII.servers
+	chmod 644 /etc/irc/ircII.servers
 fi
 
 %clean
@@ -85,9 +89,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/*
+%doc {NEWS,INSTALL,ChangeLog}.gz
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %dir %{_datadir}/irc
-%attr(644,root,root) %{_datadir}/irc
+%attr(755,root,root) %dir /etc/irc
+%attr( - ,root,root) %{_datadir}/ircii
+%attr(644,root,root) %{_mandir}/man1/*
 %attr(644,root,root) /etc/X11/wmconfig/ircii
-%{_mandir}/man1/*
