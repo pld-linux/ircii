@@ -4,7 +4,7 @@ Summary(fr):	Client irc UNIX populaire
 Summary(pl):	Popularny Unixowy klient IRC
 Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
-Version:	4.4X
+Version:	4.4Z
 Release:	1
 License:	BSD
 Group:		Applications/Networking
@@ -15,7 +15,6 @@ Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.bz2
 Source1:	%{name}.desktop
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
-Patch2:		%{name}-buffer.patch
 Obsoletes:	ircii-help
 Requires:	ncompress
 BuildRequires:	ncompress
@@ -52,7 +51,6 @@ saðlandýktan sonra kullanýcý diðer insanlarla sohbet edebilir.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 autoconf
@@ -70,14 +68,8 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_applnkdir}/Network/IRC}
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/irc-%{version} $RPM_BUILD_ROOT%{_bindir}/ircii
-
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/IRC
-
 chmod -R a=rX,u=rwX $RPM_BUILD_ROOT%{_datadir}/ircii
-
-gzip -9nf doc/* $RPM_BUILD_ROOT%{_mandir}/man1/* \
-	NEWS ChangeLog compress \
-	$RPM_BUILD_ROOT%{_datadir}/ircii/{help/{*/*,*},script/*} || :
 
 %post
 if [ ! -f /etc/irc/ircII.servers ]; then
@@ -101,9 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc NEWS README ChangeLog
 %attr(755,root,root) %{_bindir}/*ircii
 %attr(755,root,root) %dir %{_sysconfdir}/irc
 %attr( - ,root,root) %{_datadir}/ircii
 %{_applnkdir}/Network/IRC/*
-%{_mandir}/man1/*
+%{_mandir}/man*/*
