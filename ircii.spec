@@ -4,7 +4,7 @@ Summary(fr):	Client irc UNIX populaire.
 Summary(pl):	Popularny Unixowy Klient Irc
 Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
-Version:	4.4J
+Version:	4.4L
 Release:	1
 Copyright:	BSD
 Group:		Applications/Communications
@@ -12,7 +12,6 @@ Group(pl):	Aplikacje/Komunikacja
 Source:		ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
 Source1:	ircii.wmconfig
 Patch0:		ircii-config.patch
-Patch1:		ircii-nick.patch
 Obsoletes:	ircii-help
 BuildRequires:	ncompress
 BuildRoot:	/tmp/%{name}-%{version}-root
@@ -45,14 +44,12 @@ sonra kullanýcý diðer insanlarla sohbet edebilir.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
+autoconf
 %configure \
     --with-cast \
     --with-default-server=warszawa.irc.pl:6667
-
-make -C include
 make
 
 %install

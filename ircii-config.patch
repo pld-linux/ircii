@@ -1,24 +1,31 @@
-diff -urN ircii-4.4J.orig/Makefile.in ircii-4.4J/Makefile.in
---- ircii-4.4J.orig/Makefile.in	Sun Aug  1 12:18:08 1999
-+++ ircii-4.4J/Makefile.in	Sun Aug  1 12:38:32 1999
-@@ -49,11 +49,12 @@
+diff -urN ircii-4.4L.orig/Makefile.in ircii-4.4L/Makefile.in
+--- ircii-4.4L.orig/Makefile.in	Fri Sep  3 18:25:07 1999
++++ ircii-4.4L/Makefile.in	Fri Sep  3 18:29:20 1999
+@@ -59,17 +59,18 @@
  #   clean               - remove all .o files, core, and binaries
  #   distclean           - remove all files geneated by compilation/installation.
  
 -prefix = @prefix@
 -exec_prefix = @exec_prefix@
--bindir = @bindir@
 +DESTDIR=
-+prefix = ${DESTDIR}@prefix@
-+exec_prefix = ${DESTDIR}@exec_prefix@
-+bindir = ${DESTDIR}@bindir@
++prefix = $(DESTDIR)@prefix@
++exec_prefix = $(DESTDIR)@exec_prefix@
+ topdir = @srcdir@
+ srcdir = @srcdir@/source
+ incdir = @srcdir@/include
+ VPATH = @srcdir@/source
+ objdir = @objdir@
+-bindir = @bindir@
+-datadir = @datadir@
++bindir = $(DESTDIR)@bindir@
++datadir = $(DESTDIR)@datadir@
  libdir = ${exec_prefix}/lib
 -mandir = ${prefix}/man/man1
 +mandir = ${prefix}/share/man/man1
  
  # Where the ircII binary will be installed.
  # 'make install' will compile and install the program
-@@ -137,16 +138,16 @@
+@@ -153,16 +154,16 @@
  
  # Set the next line to the full path for installation of the ircio program
  # if you wish to use it. 
@@ -38,40 +45,31 @@ diff -urN ircii-4.4J.orig/Makefile.in ircii-4.4J/Makefile.in
  
  # This command will be used to install the irc help files.  If you don't
  # want to install them, replace with the following:
-@@ -215,7 +216,7 @@
+@@ -196,7 +197,7 @@
  
  installirc: irc installdirs
- 	$(INSTALL) source/irc $(INSTALL_IRC)-$(VERSION)
+ 	$(INSTALL) irc $(INSTALL_IRC)-$(VERSION)
 -	$(INSTALL) ircbug $(bindir)/ircbug
 +	$(INSTALL) ircbug $(bindir)/ircbug-ircii
  	@if test -f $(INSTALL_IRC).old; then $(RM) $(INSTALL_IRC).old; fi
  	@if test -f $(INSTALL_IRC); then $(MV) $(INSTALL_IRC) $(INSTALL_IRC).old; fi
  	$(RM) $(INSTALL_IRC)
-diff -urN ircii-4.4J.orig/configure ircii-4.4J/configure
---- ircii-4.4J.orig/configure	Sun Aug  1 12:18:08 1999
-+++ ircii-4.4J/configure	Sun Aug  1 12:43:57 1999
-@@ -3121,7 +3121,7 @@
+diff -urN ircii-4.4L.orig/configure ircii-4.4L/configure
+--- ircii-4.4L.orig/configure	Fri Sep  3 18:25:07 1999
++++ ircii-4.4L/configure	Fri Sep  3 18:26:27 1999
+@@ -3177,7 +3177,7 @@
    cat > conftest.$ac_ext <<EOF
- #line 3123 "configure"
+ #line 3179 "configure"
  #include "confdefs.h"
 -#include <curses.h>
 +#include <ncurses/curses.h>
  
  EOF
  if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
-@@ -3966,7 +3966,7 @@
- 
- if test ! -n "$IRCLIB";
- then
--	IRCLIB=\${prefix}/share/irc
-+	IRCLIB=\${prefix}/share/ircii
- fi
- 
- if test -n "$nextstep";
-diff -urN ircii-4.4J.orig/configure.in ircii-4.4J/configure.in
---- ircii-4.4J.orig/configure.in	Sun Aug  1 12:18:08 1999
-+++ ircii-4.4J/configure.in	Sun Aug  1 12:43:41 1999
-@@ -351,7 +351,7 @@
+diff -urN ircii-4.4L.orig/configure.in ircii-4.4L/configure.in
+--- ircii-4.4L.orig/configure.in	Fri Sep  3 18:25:07 1999
++++ ircii-4.4L/configure.in	Fri Sep  3 18:26:51 1999
+@@ -375,7 +375,7 @@
          AC_CHECK_LIB(xtermcap, tgetent, LIBS="-lxtermcap $olibs",
            AC_MSG_WARN(i can not find tgetent.  you might need to help me)))))
    AC_MSG_CHECKING(for tputs in curses.h)
@@ -80,18 +78,18 @@ diff -urN ircii-4.4J.orig/configure.in ircii-4.4J/configure.in
  ], AC_DEFINE(INCLUDE_CURSES_H) AC_MSG_RESULT(yes), blahhack=1; AC_MSG_RESULT(no))
  fi
  
-@@ -674,7 +674,7 @@
+@@ -699,7 +699,7 @@
  
  if test ! -n "$IRCLIB";
  then
--	IRCLIB=\${prefix}/share/irc
-+	IRCLIB=\${prefix}/share/ircii
+-	IRCLIB=\${datadir}/irc
++	IRCLIB=\${datadir}/ircii
  fi
+ AC_SUBST(IRCLIB)
  
- if test -n "$nextstep";
-diff -urN ircii-4.4J.orig/include/config.h ircii-4.4J/include/config.h
---- ircii-4.4J.orig/include/config.h	Sun Aug  1 12:18:09 1999
-+++ ircii-4.4J/include/config.h	Sun Aug  1 12:21:01 1999
+diff -urN ircii-4.4L.orig/include/config.h.dist ircii-4.4L/include/config.h.dist
+--- ircii-4.4L.orig/include/config.h.dist	Fri Sep  3 18:25:09 1999
++++ ircii-4.4L/include/config.h.dist	Fri Sep  3 18:32:46 1999
 @@ -47,7 +47,7 @@
   * file and the ircII can find it, this setting is overridden.
   */
@@ -101,16 +99,7 @@ diff -urN ircii-4.4J.orig/include/config.h ircii-4.4J/include/config.h
  #endif
  
  /*
-@@ -77,7 +77,7 @@
-  * If you undefine this you will spare some code, though, so better only
-  * set if you are sure you are going to keep your help-files compressed.
-  */
--#define ZCAT "/usr/ucb/zcat"
-+#define ZCAT "/bin/zcat"
- 
- /* Define ZSUFFIX in case we are using ZCAT */
- #ifdef ZCAT
-@@ -101,7 +101,7 @@
+@@ -89,7 +89,7 @@
   * DEFAULT_SERVER. 
  */
  
@@ -119,7 +108,7 @@ diff -urN ircii-4.4J.orig/include/config.h ircii-4.4J/include/config.h
  
  /* Uncomment the following if you want ircII to display the file
   * ircII.motd in the ircII library at startup.
-@@ -143,7 +143,7 @@
+@@ -131,7 +131,7 @@
  #define DEFAULT_CTCP_REPLY_IGNORE_SECONDS 10
  #define DEFAULT_DCC_BLOCK_SIZE 512
  #define DEFAULT_DISPLAY 1
@@ -128,7 +117,7 @@ diff -urN ircii-4.4J.orig/include/config.h ircii-4.4J/include/config.h
  #define DEFAULT_ENCRYPT_PROGRAM NULL
  #define DEFAULT_EXEC_PROTECTION 1
  #define DEFAULT_FLOOD_AFTER 3
-@@ -169,7 +169,7 @@
+@@ -157,7 +157,7 @@
  #define DEFAULT_LASTLOG 44
  #define DEFAULT_LASTLOG_LEVEL "ALL -CRAP"
  #define DEFAULT_LOG 0
@@ -137,9 +126,9 @@ diff -urN ircii-4.4J.orig/include/config.h ircii-4.4J/include/config.h
  #define DEFAULT_MAIL 0
  #define DEFAULT_MAX_RECURSIONS 10
  #define DEFAULT_MINIMUM_SERVERS 0
-diff -urN ircii-4.4J.orig/include/ircterm.h ircii-4.4J/include/ircterm.h
---- ircii-4.4J.orig/include/ircterm.h	Sun Aug  1 12:18:09 1999
-+++ ircii-4.4J/include/ircterm.h	Sun Aug  1 12:44:29 1999
+diff -urN ircii-4.4L.orig/include/ircterm.h ircii-4.4L/include/ircterm.h
+--- ircii-4.4L.orig/include/ircterm.h	Fri Sep  3 18:25:09 1999
++++ ircii-4.4L/include/ircterm.h	Fri Sep  3 18:26:27 1999
 @@ -38,7 +38,7 @@
  # define __ircterm_h_
  
