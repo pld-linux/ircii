@@ -98,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) /usr/bin/*
 
-%attr(644,root,root, 755) /usr/share/irc
+%attr(644,root,root, 755) %{_datadir}/irc
 
 %attr(644,root,root) /etc/X11/wmconfig/ircii
 %{_mandir}/man1/*
