@@ -101,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root, 755) /usr/share/irc
 
 %attr(644,root,root) /etc/X11/wmconfig/ircii
-%attr(644,root, man) %{_mandir}/man1/*
+%{_mandir}/man1/*
 
 %changelog
 * Thu Mar 04 1999 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
