@@ -80,7 +80,7 @@ krakow.irc.pl:6667
 poznan.irc.pl:6667
 hub.irc.pl:6667
 EOF
-	chown root.root /etc/irc/ircII.servers
+	chown root:root /etc/irc/ircII.servers
 	chmod 644 /etc/irc/ircII.servers
 fi
 
