@@ -1,7 +1,7 @@
 Summary:	Popular Unix Irc client
 Summary(de):	Beliebter Unix-IRC-Client
 Summary(fr):	Client irc UNIX populaire
-Summary(pl):	Popularny Uniksowy klient IRC
+Summary(pl):	Popularny uniksowy klient IRC
 Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
 Version:	20040820
