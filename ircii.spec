@@ -10,7 +10,7 @@ Patch1:		ircii-current-debian.patch
 Patch2:		ircii-4.4B.non-blocking.patch
 Patch3:		ircii-4.4B.config.patch
 Obsoletes:	ircii-help
-Buildroot:	/var/tmp/%{name}-%{version}-buildroot
+BuildRoot:	/tmp/%{name}-%{version}-root
 Summary(de):	Beliebter Unix-IRC-Client
 Summary(fr):	Client irc UNIX populaire.
 Summary(tr):	Yaygýn Unix Irc istemcisi
