@@ -16,7 +16,7 @@ Patch0:		ircii-config.patch
 Obsoletes:	ircii-help
 BuildRequires:	ncompress
 BuildRequires:	ncurses-devel
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 This is a popular Internet Relay Chat (IRC) client.  It is a program used to
