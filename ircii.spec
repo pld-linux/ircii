@@ -1,3 +1,8 @@
+Summary:        Popular Unix Irc client
+Summary(de):	Beliebter Unix-IRC-Client
+Summary(fr):	Client irc UNIX populaire.
+Summary(pl):	Popularny Unixowy Klient Irc
+Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
 Version:	4.4J
 Release:	1
@@ -11,21 +16,11 @@ Patch1:		ircii-nick.patch
 Obsoletes:	ircii-help
 BuildRequires:	ncompress
 BuildRoot:	/tmp/%{name}-%{version}-root
-Summary:        Popular Unix Irc client
-Summary(de):	Beliebter Unix-IRC-Client
-Summary(fr):	Client irc UNIX populaire.
-Summary(tr):	Yaygýn Unix Irc istemcisi
-Summary(pl):	Popularny Unixowy Klient Irc
 
 %description
 This is a popular Internet Relay Chat (IRC) client.  It
 is a program used to connect to IRC servers around the
 globe so that the user can ``chat'' with others.
-
-%description -l pl
-To jest popularny klient IRC (Internet Relay Chat). To jest
-program u¿ywany do ³±czenia siê z serwerami IRC dooko³a
-globu tak by u¿ytkownicy mogli ze sob± rozmawiaæ.
 
 %description -l de
 Dies ist ein beliebter IRC-Client (Internet Relay Chat). Sie können eine
@@ -36,6 +31,11 @@ anderen Benutzern 'chatten'.
 Le très poulaire client Internet Relay Chat (IRC). C'est
 un programme utilisé pour se connecter aux serveurs IRC à
 travers le monde entier et ``bavarder'' avec les autres.
+
+%description -l pl
+To jest popularny klient IRC (Internet Relay Chat). To jest
+program u¿ywany do ³±czenia siê z serwerami IRC dooko³a
+globu tak by u¿ytkownicy mogli ze sob± rozmawiaæ.
 
 %description -l tr
 Bu, yaygýn kullanýlan bir IRC (Internet Relay Chat) istemcisidir. Dünya
