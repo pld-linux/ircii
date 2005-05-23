@@ -5,7 +5,7 @@ Summary(pl):	Popularny uniksowy klient IRC
 Summary(tr):	Yaygýn Unix Irc istemcisi
 Name:		ircii
 Version:	20040820
-Release:	2
+Release:	3
 License:	BSD
 Group:		Applications/Networking
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
@@ -68,6 +68,10 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_desktopdir}}
 mv -f $RPM_BUILD_ROOT%{_bindir}/irc-%{version} $RPM_BUILD_ROOT%{_bindir}/ircii
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 chmod -R a=rX,u=rwX $RPM_BUILD_ROOT%{_datadir}/irc
+
+rm -f $RPM_BUILD_ROOT%{_mandir}/man1/irc.1
+echo ".so ircII.1" > $RPM_BUILD_ROOT%{_mandir}/man1/irc.1
+
 
 %post
 if [ ! -f /etc/irc/ircII.servers ]; then
