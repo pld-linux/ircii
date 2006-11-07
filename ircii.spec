@@ -100,5 +100,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*ircii
 %attr(755,root,root) %dir %{_sysconfdir}/irc
 %attr( - ,root,root) %{_datadir}/irc
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
 %{_mandir}/man*/*
