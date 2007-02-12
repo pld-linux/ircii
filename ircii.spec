@@ -1,8 +1,8 @@
 Summary:	Popular Unix Irc client
-Summary(de):	Beliebter Unix-IRC-Client
-Summary(fr):	Client irc UNIX populaire
-Summary(pl):	Popularny uniksowy klient IRC
-Summary(tr):	Yaygın Unix Irc istemcisi
+Summary(de.UTF-8):   Beliebter Unix-IRC-Client
+Summary(fr.UTF-8):   Client irc UNIX populaire
+Summary(pl.UTF-8):   Popularny uniksowy klient IRC
+Summary(tr.UTF-8):   YaygÄ±n Unix Irc istemcisi
 Name:		ircii
 Version:	20040820
 Release:	3
@@ -26,25 +26,25 @@ This is a popular Internet Relay Chat (IRC) client. It is a program
 used to connect to IRC servers around the globe so that the user can
 ``chat'' with others.
 
-%description -l de
-Dies ist ein beliebter IRC-Client (Internet Relay Chat). Sie können
+%description -l de.UTF-8
+Dies ist ein beliebter IRC-Client (Internet Relay Chat). Sie kÃ¶nnen
 eine Verbindung zu einem beliebigen IRC-Server aufbauen und mit
 anderen Benutzern 'chatten'.
 
-%description -l fr
-Le très poulaire client Internet Relay Chat (IRC). C'est un programme
-utilisé pour se connecter aux serveurs IRC à travers le monde entier
+%description -l fr.UTF-8
+Le trÃ¨s poulaire client Internet Relay Chat (IRC). C'est un programme
+utilisÃ© pour se connecter aux serveurs IRC Ã  travers le monde entier
 et ``bavarder'' avec les autres.
 
-%description -l pl
-Ircii to popularny klient IRC (Internet Relay Chat). S³u¿y do ³±czenia
-siê z serwerami IRC dooko³a globu tak, by u¿ytkownicy mogli ze sob±
-rozmawiaæ.
+%description -l pl.UTF-8
+Ircii to popularny klient IRC (Internet Relay Chat). SÅ‚uÅ¼y do Å‚Ä…czenia
+siÄ™ z serwerami IRC dookoÅ‚a globu tak, by uÅ¼ytkownicy mogli ze sobÄ…
+rozmawiaÄ‡.
 
-%description -l tr
-Bu, yaygın kullanılan bir IRC (Internet Relay Chat) istemcisidir.
-Dünya üzerinde herhangi bir IRC sunucusuna bağlantı sağlar; bağlantı
-sağlandıktan sonra kullanıcı diğer insanlarla sohbet edebilir.
+%description -l tr.UTF-8
+Bu, yaygÄ±n kullanÄ±lan bir IRC (Internet Relay Chat) istemcisidir.
+DÃ¼nya Ã¼zerinde herhangi bir IRC sunucusuna baÄŸlantÄ± saÄŸlar; baÄŸlantÄ±
+saÄŸlandÄ±ktan sonra kullanÄ±cÄ± diÄŸer insanlarla sohbet edebilir.
 
 %prep
 %setup  -q
