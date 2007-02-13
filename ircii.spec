@@ -1,8 +1,8 @@
 Summary:	Popular Unix Irc client
-Summary(de.UTF-8):   Beliebter Unix-IRC-Client
-Summary(fr.UTF-8):   Client irc UNIX populaire
-Summary(pl.UTF-8):   Popularny uniksowy klient IRC
-Summary(tr.UTF-8):   Yaygın Unix Irc istemcisi
+Summary(de.UTF-8):	Beliebter Unix-IRC-Client
+Summary(fr.UTF-8):	Client irc UNIX populaire
+Summary(pl.UTF-8):	Popularny uniksowy klient IRC
+Summary(tr.UTF-8):	Yaygın Unix Irc istemcisi
 Name:		ircii
 Version:	20040820
 Release:	3
