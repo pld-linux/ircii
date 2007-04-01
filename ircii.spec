@@ -4,13 +4,13 @@ Summary(fr.UTF-8):	Client irc UNIX populaire
 Summary(pl.UTF-8):	Popularny uniksowy klient IRC
 Summary(tr.UTF-8):	Yaygın Unix Irc istemcisi
 Name:		ircii
-Version:	20040820
-Release:	3
+Version:	20060725
+Release:	1
 License:	BSD
 Group:		Applications/Networking
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
 Source0:	ftp://ircii.warped.com/pub/ircII/%{name}-%{version}.tar.gz
-# Source0-md5:	520e3230bffcd26c9112d61b9c65c65d
+# Source0-md5:	83373f04ca5d65067170427e707413ba
 Source1:	%{name}.desktop
 Patch0:		%{name}-config.patch
 URL:		http://www.eterna.com.au/ircii/
@@ -62,7 +62,7 @@ sağlandıktan sonra kullanıcı diğer insanlarla sohbet edebilir.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/irc,%{_desktopdir}}
 
-%{__make} install \
+%{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/irc-%{version} $RPM_BUILD_ROOT%{_bindir}/ircii
