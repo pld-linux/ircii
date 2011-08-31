@@ -5,7 +5,7 @@ Summary(pl.UTF-8):	Popularny uniksowy klient IRC
 Summary(tr.UTF-8):	Yaygın Unix Irc istemcisi
 Name:		ircii
 Version:	20081115
-Release:	1
+Release:	2
 License:	BSD
 Group:		Applications/Networking
 Vendor:		IRCII Bugs <ircii-bugs@ircii.eterna.com.au>
