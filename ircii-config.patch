@@ -1,11 +1,11 @@
 diff -uNr ircii-4.4X/Makefile.in ircii-4.4X.new/Makefile.in
 --- ircii-4.4X/Makefile.in	Sat Apr 15 18:04:02 2000
 +++ ircii-4.4X.new/Makefile.in	Wed Aug 23 00:47:34 2000
-@@ -135,16 +135,16 @@
+@@ -109,16 +109,16 @@
  
  # Set the next line to the full path for installation of the ircio program
  # if you wish to use it. 
--INSTALL_IRCIO = $(bindir)/ircio
+-INSTALL_IRCIO = $(libexecdir)/ircio
 +INSTALL_IRCIO = $(bindir)/ircio-ircii
  
  # This little program is necessary to have an interactive shell
@@ -16,7 +16,7 @@ diff -uNr ircii-4.4X/Makefile.in ircii-4.4X.new/Makefile.in
  
  # This program allows you to use screen/xterm's to put new irc windows
  # on new screen/xterm windows.
--INSTALL_WSERV = $(bindir)/wserv
+-INSTALL_WSERV = $(libexecdir)/wserv
 +INSTALL_WSERV = $(bindir)/wserv-ircii
  
  # This command will be used to install the irc help files.  If you don't
