@@ -1,7 +1,7 @@
-diff -uNr ircii-4.4X/Makefile.in ircii-4.4X.new/Makefile.in
---- ircii-4.4X/Makefile.in	Sat Apr 15 18:04:02 2000
-+++ ircii-4.4X.new/Makefile.in	Wed Aug 23 00:47:34 2000
-@@ -109,16 +109,16 @@
+diff -urNp -x '*.orig' ircii-20111115.org/Makefile.in ircii-20111115/Makefile.in
+--- ircii-20111115.org/Makefile.in	2011-07-10 08:18:01.000000000 +0200
++++ ircii-20111115/Makefile.in	2023-02-02 08:55:48.090150078 +0100
+@@ -109,16 +109,16 @@ TRANS_PATH = $(IRCLIB)/translation
  
  # Set the next line to the full path for installation of the ircio program
  # if you wish to use it. 
@@ -21,7 +21,7 @@ diff -uNr ircii-4.4X/Makefile.in ircii-4.4X.new/Makefile.in
  
  # This command will be used to install the irc help files.  If you don't
  # want to install them, replace with the following:
-@@ -178,7 +178,7 @@
+@@ -154,7 +154,7 @@ installbin: installirc installio install
  
  installirc: irc installdirs
  	$(INSTALL) irc $(INSTALL_IRC)-$(VERSION)
@@ -30,10 +30,10 @@ diff -uNr ircii-4.4X/Makefile.in ircii-4.4X.new/Makefile.in
  	@if test -f $(INSTALL_IRC).old; then $(RM) $(INSTALL_IRC).old; fi
  	@if test -f $(INSTALL_IRC); then $(MV) $(INSTALL_IRC) $(INSTALL_IRC).old; fi
  	$(RM) $(INSTALL_IRC)
-diff -uNr ircii-4.4X/configure.in ircii-4.4X.new/configure.in
---- ircii-4.4X/configure.in	Wed Aug 23 00:44:23 2000
-+++ ircii-4.4X.new/configure.in	Wed Aug 23 00:48:22 2000
-@@ -696,7 +696,7 @@
+diff -urNp -x '*.orig' ircii-20111115.org/configure.in ircii-20111115/configure.in
+--- ircii-20111115.org/configure.in	2011-11-14 22:57:23.000000000 +0100
++++ ircii-20111115/configure.in	2023-02-02 08:55:48.090150078 +0100
+@@ -483,7 +483,7 @@ AC_SUBST(bindir)
  
  if test ! -n "$IRCLIB";
  then
@@ -42,9 +42,9 @@ diff -uNr ircii-4.4X/configure.in ircii-4.4X.new/configure.in
  fi
  AC_SUBST(IRCLIB)
  
-diff -uNr ircii-4.4X/include/config.h.dist ircii-4.4X.new/include/config.h.dist
---- ircii-4.4X/include/config.h.dist	Sun Jun 11 09:30:54 2000
-+++ ircii-4.4X.new/include/config.h.dist	Wed Aug 23 00:53:14 2000
+diff -urNp -x '*.orig' ircii-20111115.org/include/config.h.dist ircii-20111115/include/config.h.dist
+--- ircii-20111115.org/include/config.h.dist	2008-10-28 17:22:48.000000000 +0100
++++ ircii-20111115/include/config.h.dist	2023-02-02 08:55:48.090150078 +0100
 @@ -47,7 +47,7 @@
   * file and the ircII can find it, this setting is overridden.
   */
@@ -63,8 +63,8 @@ diff -uNr ircii-4.4X/include/config.h.dist ircii-4.4X.new/include/config.h.dist
  
  /* Uncomment the following if you want ircII to display the file
   * ircII.motd in the ircII library at startup.
-@@ -159,7 +159,7 @@
- #define DEFAULT_LASTLOG 44
+@@ -164,7 +164,7 @@
+ #define DEFAULT_LASTLOG 440
  #define DEFAULT_LASTLOG_LEVEL "ALL -CRAP"
  #define DEFAULT_LOG 0
 -#define DEFAULT_LOGFILE "IrcLog"
